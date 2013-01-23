@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Functional Programming with Clojure</title>
+
+    <meta charset='utf-8'>
+    <script src='slides.js'></script>
+  </head>
+ 
+  <style>
+    /* Your individual styles here, or just use inline styles if thats
+       what you want. */
+   
+   
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-io2011'>
+     
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->      
+     
+     <!-- <article class='biglogo'>
+      </article> -->
+
+      <article>
+        <h1>
+          Functional Programming with Clojure
+          <br><br>
+          A practical Lisp for the JVM
+        </h1>
+        <p>
+          Manoj Waikar
+          <br>
+          Dec 11, 2012
+        </p>
+      </article>
+     
+     <article>
+		<h3> 
+			Some trivia -
+		</h3>
+		<br></br>
+		<div class="build">
+			<p>Which is the oldest programming language?</p>
+			<p>Fortran</p>
+		</div>
+		<br></br>
+		<div class="build">
+			<p>Which is the second oldest programming language?</p>
+			<p>Lisp</p>
+		</div>
+      </article>
+      
+      <article>
+		<h3> 
+			What is Lisp?
+		</h3>
+		<ul class="build">
+			<li>Lisp stands for <span class='blue'>Lis</span>t <span class='blue'>P</span>rocessing.</li>	
+			<li>Lisp is the language with the least syntax.</li>
+			<li>An example of Lisp code - (+ 1 2)</li>
+			<li>So in the above example, "(+ 1 2)" is a list.</li>
+			<li>The first thing in the list "+" is the function</li>
+			<li>Everything else in the list are arguments to the function</li>
+			<li>Those with a keen eye would've noticed that Lisp uses prefix notation.</li>
+		</ul>
+      </article>
+      
+      <article>
+		<h3> 
+			So is prefix notation a big deal?
+		</h3>
+		<ul class="build">
+			<li>Well, then try adding 5 integers in your favorite language.</li>	
+			<li>Most likely, it will look like 1 + 2 + 3 + 4 + 5</li>
+			<li>How about this - (+ 1 2 3 4 5)</li>
+			<li>What's the value of (- (+ 4 (* 2 3)) (/ 10 2))?</li>
+			<li>Those who answered 5 are awesome programmers.</li>
+			<li>But if this same problem was given in infix notation -</li>
+			<li>4 + 2 * 3 - 10 / 2</li>
+			<li>????</li>
+			<li>So, with prefix notation, you don't have to worry about operator precedence.</li>
+		</ul>
+      </article>
+      
+      <article>
+		<h3> 
+			Lisp is homoiconic
+		</h3>
+		<ul class="build">
+			<li>Whoa Dude!!! Don't tell me jargon.</li>	
+			<li>Homo means same, iconic means representation.</li>
+			<li>Which means, Lisp code is written using Lisp data structure, which is list.</li>
+			<li>Or it also means that the structure of Lisp code looks the same as Lisp data.</li>
+			<li>Lisp code is made out of Lisp data objects. Lisp code, after it's read by the parser, is made of data structures that you can traverse.</li>
+		</ul>
+      </article>
+
+      <article>
+        <h3>
+          Let's see some Lisp code.
+        </h3>
+        <ul class="build">
+			<li><span class="green">(defun add (a b) <br>&nbsp;&nbsp;&nbsp;(+ a b))</br></span></li>
+			<li>"defun" is a built-in Lisp function which lets us define our own functions.</li>
+			<li>The remaining are arguments to the "defun" function.</li>
+			<li>Please notice that the whole code is a nested list.</li>
+		</ul>
+      </article>
+	  
+	  <article>
+        <h3>
+          So why does Lisp matter?
+        </h3>
+        <ul class="build">
+			<li>Lisp supports metaprogramming using macros.</li>
+			<li>Just like "defun" is used to define our own functions, "defmacro" is used to define a macro.</li>
+			<li>The biggest difference between a function and a macro is that the arguments to a macro are not evaluated.</li>
+			<li>Which means that the arguments are passed as a list, and we can parse the list and do whatever we want with it.</li>
+		</ul>
+      </article>
+      
+	  <article>
+        <h3>
+          So then, why Clojure? Why not Lisp, or for that matter, Ruby?
+        </h3>
+		<ul class="build">
+			<li>Fragmentation - which means different Lisp dialects (e.g. Common Lisp, Scheme) implement the spec in different ways.</li>
+			<li>Also because enterprises might not want to use Lisp or Ruby VMs.</li>
+			<li>Since most enterprises already have JVM / CLR installed and any new application would most likely have to interop with existing applications.</li>
+		</ul>
+      </article>
+      
+      <article>
+      	<h3>And why functional programming?</h3>
+      	<ul class="build">
+      		<li>A 100 line program in F#, accomplished the equivalent functionality of a 1000 line C# program. (as mentioned in the book Foundations of F#)</li>
+      		<li>In rebuilding Racket’s graphic layer 200,000 lines of C++ code was replaced by 30,000 lines of Racket (Scheme) code.</li>
+      		<li>As per Paul Graham - So how much shorter are your programs if you write them in Lisp? Most of the numbers I've heard for Lisp versus C, for example, have been around 7-10x.</li>
+      		<li>It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures. - Alan Perlis</li>
+      	</ul>
+      </article>
+      
+      <article>
+			<h3>So what is functional programming -</h3>
+			<p></p>
+			
+			In computer science, functional programming is a programming paradigm that treats computation as the evaluation of 
+			mathematical functions and <span class='red'>avoids state and mutable data</span>. It emphasizes the 
+			<span class='green'>application of functions</span>, in contrast to the 
+			imperative programming style, which emphasizes <span class='red'>changes in state</span>.  
+			<p></p>
+			Concepts -
+			<p></p>
+			<span class='blue'>First-class and higher-order functions -</span> First class function means a function need not be inside a class or something.
+			Higher-order functions are functions that can either take other functions as 
+			arguments or return them as results.
+      </article>
+      
+      <article>
+			<h3>What is functional programming (continued)-</h3>
+			<p></p>
+			
+			<span class='blue'>Pure functions -</span> Purely functional functions (or expressions) have no memory or I/O side effects.
+			<ul>
+				<li>If the result of a pure expression is not used, it can be removed without affecting other expressions.</li>
+				<li>If a pure function is called with parameters that cause no side-effects, the result is constant with respect to 
+				that parameter list (sometimes called <span class='blue'>referential transparency</span>), i.e. if the pure function is again called with the 
+				same parameters, the same result will be returned (this can enable caching optimizations such as 
+				<span class='blue'>memoization</span>).</li>						
+			</ul>    
+      </article>
+      
+      <article>
+			<h3>What is functional programming (continued)-</h3>
+			<p></p>
+						
+			<ul>
+				<li>If there is no data dependency between two pure expressions, then <span class='blue'>their order can be reversed, 
+				or they can be performed in parallel</span> and they cannot interfere with one another (in other terms, the evaluation 
+				of any pure expression is thread-safe).</li>	
+			</ul>
+			
+			<p></p>
+			<span class='blue'>Recursion -</span> Iteration (looping) in functional languages is usually accomplished via recursion.
+      </article>
+	  
+	  <article>
+		<h3> 
+			Some more trivia -
+		</h3>
+		<p></p>
+		<div class="build">
+			<p>Do you know any programming language which -</p>
+			<p>runs on JVM</p>
+			<p>and, runs on CLR</p>
+			<p>and, compiles to JavaScript</p>
+		</div>
+		<br></br>
+		<div class="build">
+			<p>And in the near future will -</p>
+			<p>run on Python</p>
+			<p>and, run on Lua</p>
+			<p>and will compile to C (using Scheme)</p>
+		</div>
+      </article>
+      
+	  <article>
+	  	<h3>Impressive, isn't it?</h3>
+	  	<ul>
+			<li>JVM - <a href="http://www.clojure.org/">Clojure</a></li>
+			<li>CLR - <a href="https://github.com/clojure/clojure-clr">ClojureCLR</a></li> 	
+			<li>JavaScript - <a href="https://github.com/clojure/clojurescript">ClojureScript</a></li> 	
+			<li>Python - <a href="https://github.com/halgari/clojure-py">Clojure-py</a></li> 	
+			<li>Lua - <a href="https://github.com/raph-amiard/clojurescript-lua">ClojureScript-lua</a></li> 	
+			<li>C - <a href="https://github.com/takeoutweight/clojure-scheme">Clojure-scheme</a></li> 	
+	  	</ul>
+      </article>
+      
+      <article>
+		<h3>Let's compare some Ruby vs. Clojure one-liners -</h3>
+		<br></br>
+		<p>
+			<span class='blue'>Multiply each item in a list by 2</span>
+			<ul class='build'>
+				<li>(1..10).map { |n| n * 2 }</li>
+				<li><span class='green'>(map #(* 2 %) (range 1 11))</span></li>	
+			</ul>
+			
+			<br></br>
+			<span class='blue'>Sum a list of numbers</span>
+			<ul class='build'>
+				<li>(1..1000).inject(:+)</li>
+				<li><span class='green'>(reduce + (range 1 1001))</span></li>	
+			</ul>
+		</p>
+	  </article>
+	  
+	  <article>
+		<h3>Ruby vs. Clojure one-liners (continued) -</h3>
+		<br></br>
+		<p>
+			<span class='blue'>Filter a list of numbers</span>
+			<ul class='build'>
+				<li>[49, 58, 76, 82, 88, 90].partition { |n| n > 60 }</li>
+				<li><span class='green'>(partition-by #(> % 60) [49 58 76 82 88 90])</span></li>	
+			</ul>
+			
+			<br></br>
+			<span class='blue'>Find minimum (or maximum) in a list</span>
+			<ul class='build'>
+				<li>[14, 35, -7, 46, 98].min</li>
+				<li>[14, 35, -7, 46, 98].max</li>
+				<li><span class='green'>(reduce max [14 35 -7 46 98])</span></li>
+				<li><span class='green'>(reduce min [14 35 -7 46 98])</span></li>
+			</ul>
+		</p>
+	  </article>
+	  
+	  <article>
+		<h3>Ruby vs. Clojure one-liners (continued) -</h3>
+		
+		<p>
+			<span class='blue'>Fetch and parse an XML web service</span>
+			<ul class='build'>
+				<li>require 'open-uri' require 'nokogiri'</li>
+				<li>results = Nokogiri::XML(open("http://search.twitter.com/search.atom?&q=scala"))</li>
+				<li><span class='green'>(clojure.xml/parse "http://search.twitter.com/search.atom?&q=clojure")</span></li>	
+			</ul>			
+			
+			<span class='blue'>Happy Birthday</span>
+			<ul>
+				<li>4.times { |n| puts "Happy Birthday #{n==2 ? "dear Tony" : "to You"}" }</li>
+				<li><span class='green'>(dotimes [n 4] (println "Happy Birthday" (if (= n 2) "dear Rich" "to You")))</span></li>
+			</ul>
+		</p>
+	  </article>
+	  
+	  <article>
+		<h3>Ruby vs. Clojure one-liners (continued) -</h3>
+		<br></br>
+		<p>
+			<span class='blue'>Read a file</span>
+			<ul class='build'>
+				<li>file_text = File.read("data.txt")</li>
+				<li>file_lines = File.readlines("data.txt")</li>
+				<li><span class='green'>(def file-text (slurp "data.txt"))</span></li>
+				<li><span class='green'>(line-seq (clojure.java.io/reader (clojure.java.io/file “data.txt”)))</span></li>
+			</ul>
+		</p>
+	  </article>
+	  
+	  <article>
+	  	<h3>Let's see how's Clojure different than Ruby...</h3>
+	  	<ul class="build">
+	  		<li>Immutable data + first class functions (no classes)</li>
+	  		<li>Embraces a platform (JVM)</li>
+	  		<li>Designed for Concurrency</li>
+	  		<li>Clojure is a compiled language</li>
+	  		<li>Arity overloading in a single function object</li>
+	  		<li>Infinite sequences</li>
+	  	</ul>
+      </article>
+	  
+	  <article>
+	  	<h3>Runtime polymorphism</h3>
+	  	<p>
+	  		The basic idea behind runtime polymorphism is that a single function designator dispatches to multiple independently-defined 
+	  		function definitions <span class='blue'>based upon some value of the call</span>. For traditional single-dispatch OO 
+	  		languages that value is the type of the 'receiver' or 'this'.
+	  	</p>
+	  	
+	  	<p>Multimethods are in every respect fns, e.g. can be passed to map etc.</p>
+	  </article>
+	  
+	  <article>
+	  	<h3>Pre and Post conditions</h3>
+	  	<p>
+	  		Clojure's pre and post conditions provide building blocks for DbC (Design by contract) or Contract Programming.
+	  		It prescribes that software designers should define formal, precise and verifiable interface specifications for software 
+	  		components, which extend the ordinary definition of abstract data types with 
+	  		<span class='blue'>preconditions, postconditions and invariants</span>.
+	  	</p>
+	  	
+	  	<br></br>
+	  	<h3>Destructuring</h3>
+	  	<p>
+	  		Destructuring refers to the way that collections can be pulled apart into local bindings.
+	  	</p>
+	  </article>   
+     
+      <article>
+        <h3>
+          <span class='blue'>Thank you!</span>
+        </h3>
+      </article>
+
+    </section>
+
+  </body>
+</html>
